@@ -1,0 +1,79 @@
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+// Global variables
+
+$pryColor: #202c37;
+$secColor: #2b3945;
+$whiteColor: #fff;
+$lightWhite: #fafafa0b;
+$mainFont: "Fira Sans", sans-serif;
+
+
+
+
+
+
+// Global variables
+
+
+
+body {
+    
+    font-family: $mainFont;
+    margin: 0;
+    padding: 0;
+}
+
+body[data-themes="lightTheme"] {
+    background-color: $whiteColor;
+    color: $pryColor;
+    header {
+        background-color: $lightWhite;
+    }
+}
+
+
+body[data-themes="darkTheme"] {
+    background-color: $pryColor;
+ color: $whiteColor;
+ header {
+    background-color: $lightWhite;
+}
+}
+
+.Btn {
+  
+    border: none;
+    background-color: transparent;
+    transition: all 5s ease-in-out;
+}
+
+.BtnTextDark {
+    color: #000;
+}
+.BtnTextLight {
+    
+    color: $whiteColor;
+}
+
+.container {
+    width: 100%;
+    max-width: 1320px;
+    @media screen and (max-width: 1140px) {
+        width: 100%;
+    max-width: 1140px;
+    }
+    @media screen and (max-width: 960px) {
+        width: 100%;
+    max-width: 960px;
+    }
+    @media screen and (max-width: 720px) {
+        width: 100%;
+    max-width: 720px;
+    }
+}

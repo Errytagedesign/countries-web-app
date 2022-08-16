@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    margin: 0 auto;
+    box-shadow: 2px 2px 6px rgba(0,0,0, 0.2);
+
+    @media screen and  (max-width: 500px) {
+    padding: 1em;
+        
+}
+h3 {
+    cursor: pointer;
+    transition: .3s ease-in;
+    -webkit-text-stroke: 0;
+}
+
+
+    h3:hover {
+color: transparent;
+transform: scale(1.03);
+-webkit-text-stroke: #fff 2px;
+    }
+}
