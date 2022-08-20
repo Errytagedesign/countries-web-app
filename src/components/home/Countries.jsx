@@ -1,39 +1,26 @@
 import React, {useState, useEffect} from 'react'
 // import { motion } from 'framer-motion'
 import {  BaseUrl } from '../../utils/MotionConainer'
-import millify from 'millify'
-import {Link} from "react-router-dom"
+// import millify from 'millify'
+// import {Link} from "react-router-dom"
 import { BsSearch } from 'react-icons/bs'
 
 
 // Styles
 import './Countries.scss'
 import Spinner from '../spinner/Spinner'
+import Country from '../country/Country'
 
  
 
-function Countries({countryInd}) {
+function Countries() {
 
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [countries, setCountries] = useState([])
-
-    // Set search query
+    const [filterRegion, setFilterRegion] = useState("All")
     const [searchQuery, setSearchQuery] = useState("")
-
-    // Set search param
     const [searchParam] = useState([ "name", "capital" ])
-
-
-   const handleChange =(e) => {
-
-    // set the value of the input into the state "searchQuery" which is empty initially
-  setSearchQuery(e.target.value)
-
-  // Then saved the searchQuery value into the search param
-  // setSearchParam(searchQuery)
-
-    }
 
     useEffect(() => {
       fetch(BaseUrl)
@@ -60,13 +47,26 @@ function Countries({countryInd}) {
 
   // Filter out the countries useState value, and return it
   const search = (countries) => {
+
+    // filter the countries data to return data by search queries
+// eslint-disable-next-line array-callback-return
 return countries.filter((item) => {
-  return searchParam.some((newCountries) => {
+
+  // If statement to check if filter by region value matches countries.region
+  if (filterRegion === item.region)
+{return searchParam.some((newCountries) => {
   
 return item[newCountries]?.toString()
 .toLowerCase()
 .indexOf(searchQuery.toLowerCase()) > -1
   })
+} else if (filterRegion === "All")
+  {return  searchParam.some((newCountries) => {
+  
+return <Spinner /> && item[newCountries]?.toString()
+.toLowerCase()
+.indexOf(searchQuery.toLowerCase()) > -1
+  })}
 })
   }
 
@@ -88,42 +88,30 @@ return item[newCountries]?.toString()
       id="search-form" 
        type="search" 
        placeholder='search for country'
-       onChange={handleChange} /> 
+        onChange={(e) =>  setSearchQuery(e.target.value) } /> 
       </aside> 
 
     <aside className='Select'>
-       <select> 
-        {countries.map((item, idx) => (
-          <option key={idx}> {item.region} </option>
-        ))}
+       <select className='txt' onChange={(e) => setFilterRegion(e.target.value)}> 
+       <option  value="All"> Filter by Region </option>
+       <option value="Africa"> Africa </option>
+       <option value="Americas"> Americas </option>
+       <option value="Antarctic"> Antarctic </option>
+       <option value="Asia"> Asia </option>
+       <option value="Europe"> Europe </option>
+       <option value="Oceania"> Oceania </option>
+       
       </select> 
       </aside> 
 
       </div>
       
-       <section>
+       <section className='MapCont'>
         {
-      search(countries).map((item, index) => (
-            
-              <section 
-                data-aos="fade-up"
-                data-aos-duration="3000"
-                key={index}>
-                 <Link to={`${index}`} > 
-                  <div>
-                     <img src={item.flags.svg} alt="" />
-                    </div> 
-                   <article data-aos="fade-up"
-                    data-aos-duration="4000" className='bg'>
-                    <h2> { item.name.common} </h2>
-                    <p> Population:  <strong>  {millify(item.population)} </strong> </p>
-
-                    <p> Region:  <strong>  {item.region} </strong> </p>
-
-                    <p> Capital:  <strong>  {item.capital} </strong> </p>
-                    </article> 
-                    </Link> 
-                </section> 
+      search(countries).map((country, index) => (
+            <section className='MapItems'>
+              <Country key={index}  country={country} />
+            </section>
                 
             ))
         } </section>
