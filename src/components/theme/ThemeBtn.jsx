@@ -2,18 +2,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { BsFillMoonFill, BsFillBrightnessHighFill } from 'react-icons/bs'
+import { Container } from '../../utils/MotionConainer'
 
-const Container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      stagerChildren: 0.2,
-    }
-  }
-}
 
 function ThemeBtn() {
 

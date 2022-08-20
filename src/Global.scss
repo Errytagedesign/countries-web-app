@@ -11,11 +11,9 @@ $pryColor: #202c37;
 $secColor: #2b3945;
 $whiteColor: #fff;
 $lightWhite: #fafafa0b;
+$lightGrey: #fafafa;
 $mainFont: "Fira Sans", sans-serif;
-
-
-
-
+$Shadow:    2px 2px 5px rgba(0,0,0, 0.2);
 
 
 // Global variables
@@ -32,7 +30,7 @@ body {
 body[data-themes="lightTheme"] {
     background-color: $whiteColor;
     color: $pryColor;
-    header {
+    .bg {
         background-color: $lightWhite;
     }
 }
@@ -41,10 +39,24 @@ body[data-themes="lightTheme"] {
 body[data-themes="darkTheme"] {
     background-color: $pryColor;
  color: $whiteColor;
- header {
+ .bg {
     background-color: $lightWhite;
 }
 }
+
+
+h2, h3, h4, h5 h6, p, a, small {
+    font-family: $mainFont;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+
 
 .Btn {
   
@@ -53,9 +65,12 @@ body[data-themes="darkTheme"] {
     transition: all 5s ease-in-out;
 }
 
+
 .BtnTextDark {
     color: #000;
 }
+
+
 .BtnTextLight {
     
     color: $whiteColor;
@@ -76,4 +91,34 @@ body[data-themes="darkTheme"] {
         width: 100%;
     max-width: 720px;
     }
+}
+
+
+// Image hover effect
+img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 1;
+    // animation: ImgGrow .3s ease-in ;
+    &:hover {
+      
+        animation: ImgGrow .5s ease-in ;
+    }
+}
+
+
+@keyframes ImgGrow {
+
+    0% {
+        opacity: .5;
+        transform: scaleX(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1.05);
+
+    }
+    
 }
