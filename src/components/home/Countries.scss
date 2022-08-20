@@ -78,6 +78,7 @@ main {
 
 
 section {
+    width: 100%;
     margin: 1em auto;
     display: flex;
     flex-wrap: wrap;
@@ -102,7 +103,15 @@ section {
             object-fit: cover;
        border-radius: 7px;
 
-           
+       @media screen and (max-width: 768px) {
+        height: 180px;
+
+     }
+
+       @media screen and (max-width: 500px) {
+        height: 200px;
+
+     }
         }
 
 

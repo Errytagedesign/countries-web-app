@@ -22,11 +22,16 @@ function Countries({countryInd}) {
     const [searchQuery, setSearchQuery] = useState("")
 
     // Set search param
-    const [searchParam] = useState(["capital", "name"])
+    const [searchParam] = useState([ "name", "capital" ])
 
 
    const handleChange =(e) => {
+
+    // set the value of the input into the state "searchQuery" which is empty initially
   setSearchQuery(e.target.value)
+
+  // Then saved the searchQuery value into the search param
+  // setSearchParam(searchQuery)
 
     }
 
@@ -51,7 +56,19 @@ function Countries({countryInd}) {
     }, [])
 
 
+  // Search function
+
+  // Filter out the countries useState value, and return it
+  const search = (countries) => {
+return countries.filter((item) => {
+  return searchParam.some((newCountries) => {
   
+return item[newCountries]?.toString()
+.toLowerCase()
+.indexOf(searchQuery.toLowerCase()) > -1
+  })
+})
+  }
 
     if (error){
       return <div> {error.message} </div>
@@ -86,7 +103,7 @@ function Countries({countryInd}) {
       
        <section>
         {
-      countries.map((item, index) => (
+      search(countries).map((item, index) => (
             
               <section 
                 data-aos="fade-up"
