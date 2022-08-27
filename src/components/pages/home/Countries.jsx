@@ -30,7 +30,13 @@ function Countries() {
 
 
  const filterCountry =  countriesMain.filter((item) => {
-  return (item.capital?.includes(value),
+
+  // convert array into an object
+item.city = Object.assign({}, item.capital )
+  console.log(item.city)
+
+
+  return (item.city[0]?.toLowerCase().includes(value.toLowerCase()) || 
   item.name.common.toLowerCase().includes(value.toLowerCase())
  
  )

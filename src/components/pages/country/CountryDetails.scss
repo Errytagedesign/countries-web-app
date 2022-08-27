@@ -4,7 +4,6 @@ main {
     display: flex;
     flex-direction: column;
     padding: 1em;
-margin-bottom: 5em;
     @media screen and (min-width: 1000px) {
     padding: 2em;
         
@@ -26,6 +25,8 @@ margin-bottom: 5em;
     .country {
         display: flex;
         flex-direction: column;
+margin-bottom: 5em;
+
 
         @media screen and (min-width: 1000px) {
             
