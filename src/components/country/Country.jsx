@@ -20,7 +20,7 @@ function Country({country: {name, population, region, capital, cca3, flags }}) {
                 data-aos="fade-up"
                 data-aos-duration="3000"
                >
-                 <Link to={`/${cca3}`} > 
+                 <Link to={cca3} > 
                   <div>
                      <img src={flags.svg} alt="" />
                     </div> 

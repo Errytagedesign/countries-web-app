@@ -68,7 +68,7 @@ main {
             
             width: 100%;
           border: none;
-          padding: 1em 5em;
+          padding: 1em 3em;
          }
        }
 
@@ -85,6 +85,11 @@ main {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 2em;
+
+    @media screen and (max-width: 500px) {
+    padding: .5em;
+        
+    }
    
     .MapItems {
         width: 32%;
