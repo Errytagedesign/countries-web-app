@@ -20,11 +20,8 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Countries d />} />
-          <Route
-            path=":countryCode"
-            element={<CountryDetails country={Countries} />}
-          />
+          <Route path="/" element={<Countries />} />
+          <Route path="/view/:countryCodes" element={<CountryDetails />} />
         </Routes>
       </Router>
     </div>

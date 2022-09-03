@@ -1,5 +1,5 @@
 import React, {useRef} from 'react'
-import { useCountryFetch} from '../../../utils/MotionConainer'
+import { useHomeFetch} from '../../../Hooks/fetchCountries'
 import { BsSearch } from 'react-icons/bs'
 
 
@@ -13,10 +13,11 @@ import Country from '../../country/Country'
 function Countries() {
   
 
-    const {countries, countriesMain, isLoaded, error, setCountries, fetchData} = useCountryFetch()
-    console.log(countriesMain)
+    const {countries, countriesMain, isLoaded, setCountries} = useHomeFetch()
+
     
 
+    
   //  const countryInputRef = useRef()
    const regionRef = useRef()
 
@@ -32,11 +33,11 @@ function Countries() {
  const filterCountry =  countriesMain.filter((item) => {
 
   // convert array into an object
-item.city = Object.assign({}, item.capital )
-  console.log(item.city)
+// item.city = Object.assign({}, item.capital )
+//   console.log(item.city)
 
 
-  return (item.city[0]?.toLowerCase().includes(value.toLowerCase()) || 
+  return (item.capital.toLowerCase().includes(value.toLowerCase()) || 
   item.name.common.toLowerCase().includes(value.toLowerCase())
  
  )
@@ -48,42 +49,64 @@ setCountries(filterCountry)
   }
 
 
-  // Filter by region 
+  // Filter by region
+  
+  const handleSelect = (e) => {
+    e.preventDefault();
 
-  const filterByRegion = (filterRegion) => {
+    // Setting the value of the select event to selectValue
+    const selectValue = e.target.value
 
- filterRegion = regionRef.current.value
+    // filter countries to return only regions
+    const selectRegion = countriesMain.filter((item) => {
 
-   if (filterRegion){
-      const fetchRegion = async () => {
-      const response = await fetch(`https://restcountries.com/v3.1/region/${filterRegion}`)
-     const data = await response.json()
+      // check if the selected value is "All" and return countries without filtering it
+      if(selectValue === "All"){
+        return item
 
-     if(filterRegion === "All"){
-      try{
-        fetchData()
-      } catch(error){
-        console.log(error)
-      } return;
-     }
-     setCountries(data)
+        // else return base on filter value
+      } else {
 
-}
-try {
-  fetchRegion()
-} catch(error){
-  console.log(error)
-}
+        return item.region === selectValue
+      }
+    })
 
-
-    }
-
+    setCountries(selectRegion)
   }
 
+  // Another way to filter by fetching over again
 
-    if (error){
-      return <div> {error.message} </div>
-    } else if(!isLoaded){
+//   const filterByRegion = (filterRegion) => {
+
+//  filterRegion = regionRef.current.value
+
+//    if (filterRegion){
+//       const fetchRegion = async () => {
+//       const response = await fetch(`https://restcountries.com/v3.1/region/${filterRegion}`)
+//      const data = await response.json()
+
+//      if(filterRegion === "All"){
+//       try{
+//         fetchData()
+//       } catch(error){
+//         console.log(error)
+//       } return;
+//      }
+//      setCountries(data)
+
+// }
+// try {
+//   fetchRegion()
+// } catch(error){
+//   console.log(error)
+// }
+
+
+//     }
+
+//   }
+
+ if(!isLoaded){
       return <Spinner />
     } else 
 {
@@ -108,7 +131,7 @@ try {
        <select 
        ref={regionRef}
        className='txt' 
-       onChange={filterByRegion}
+       onChange={handleSelect}
      > 
        <option  value="All"> Filter by Region </option>
        <option value="Africa"> Africa </option>

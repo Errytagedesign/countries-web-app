@@ -1,4 +1,5 @@
 import React from 'react'
+// import { useParams } from 'react-router-dom'
 
 import millify from 'millify'
 import {Link} from "react-router-dom"
@@ -7,9 +8,10 @@ import {Link} from "react-router-dom"
 // Styles
 import './Country.scss'
 
- 
+// const {countryCode} = useParams
 
-function Country({country: {name, population, region, capital, cca3, flags }}) {
+
+function Country({country: {name, population, region, capital, slug, flags }}) {
 
    
   return (
@@ -20,9 +22,9 @@ function Country({country: {name, population, region, capital, cca3, flags }}) {
                 data-aos="fade-up"
                 data-aos-duration="3000"
                >
-                 <Link to={cca3} > 
+                 <Link to={`/view/${slug}`} > 
                   <div>
-                     <img src={flags.svg} alt="" />
+                     <img src={flags} alt="" />
                     </div> 
                    <article data-aos="fade-up"
                     data-aos-duration="4000" className='bg'>
